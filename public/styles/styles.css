@@ -1,13 +1,156 @@
-body {
-  background-color: #777777;
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+.container {
+  width: 80%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f9fa; /* Light background */
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-#joke {
-  font-size: 1.5em;
-  color: #ffffff;
+/* Title styling */
+h1 {
   text-align: center;
-  margin-top: 10%;
+  font-family: 'Arial', sans-serif;
+  color: #2c3e50; /* Darker color */
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+/* Form container */
+/* Improved form layout using grid */
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+}
+
+label {
+  font-family: 'Arial', sans-serif;
+  color: #34495e;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+/* Align radio buttons with labels */
+.radio-group,
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.radio-group div,
+.checkbox-group div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.radio-group input,
+.checkbox-group input {
+  margin-right: 10px;
+}
+
+/* Number input wider */
+input[type='number'] {
+  width: 70px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Better styling for fieldsets */
+fieldset {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* Legend styling */
+legend {
+  padding: 0 10px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+/* Submit button */
+button#get-joke {
+  grid-column: span 2;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-family: 'Arial', sans-serif;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button#get-joke:hover {
+  background-color: #2980b9;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  form {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Styling for the miscellaneous checkboxes */
+#Misc-Opt {
+  display: none; /* Initially hidden */
+  grid-template-columns: repeat(2, 1fr); /* Create 2 equal-width columns */
+  gap: 10px; /* Space between the columns */
+  margin-top: 10px;
+  padding-left: 15px;
+}
+
+#Misc-Opt div {
+  display: flex;
+  align-items: center; /* Vertically align the checkbox and label */
+}
+
+/* When Miscellaneous is selected */
+input[type='radio']:checked + label + #Misc-Opt {
+  display: grid; /* Use grid layout to align checkboxes in 2 columns */
+  transition: all 0.3s ease-in-out; /* Smooth transition */
+}
+
+#Misc-Opt input[type='checkbox'] {
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+#Misc-Opt label {
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  color: #2c3e50;
+  cursor: pointer;
+}
+
+.jokes ul {
+  list-style-type: disc;
+}
+
+.jokes li {
+  margin-bottom: 10px;
+}
+
+.jokes pre {
+  font-family: monospace; /* Use a monospace font */
+  white-space: pre-wrap; /* Ensures long text wraps */
+  line-height: 1.5; /* Set a consistent line height */
+}
+
+.jokes .separator-line {
+  font-family: monospace; /* Use a monospace font for hyphens */
+  white-space: nowrap; /* Prevent wrapping of hyphens */
+  margin: 10px 0;
 }

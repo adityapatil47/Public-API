@@ -10,7 +10,7 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  res.render('index.ejs', { joke: 'wait joking...' });
+  res.render('index.ejs', { jokesArray: ['wait joking...'] });
 });
 
 app.post('/getJoke', async (req, res) => {
@@ -26,13 +26,41 @@ app.post('/getJoke', async (req, res) => {
         category = category.slice(0, -1);
       }
     }
-    const response = await axios.get(`${URL}/${category}?lang=en&format=txt`);
-    const joke = response.data;
-    // console.log(joke);
 
-    res.render('index.ejs', { joke: joke });
+    const langAndFormat = '?lang=en&format=txt';
+    const jokeType = req.body.jokeType;
+    var jokeTypeQuery = '';
+
+    if (jokeType === 'single') {
+      jokeTypeQuery += `&type=${jokeType}`;
+    } else if (jokeType === 'twopart') {
+      jokeTypeQuery += `&type=${jokeType}`;
+    }
+
+    const jokeAmount = req.body.jokeAmount;
+
+    if (jokeAmount > 1) {
+      jokeTypeQuery += `&amount=${jokeAmount}`;
+    }
+
+    var requestedURL = `${URL}/${category}${langAndFormat}${jokeTypeQuery}`;
+    // console.log(requestedURL);
+
+    const response = await axios.get(requestedURL);
+
+    var joke = response.data;
+
+    let jokesArray = joke.split(
+      '----------------------------------------------'
+    );
+
+    // Trim leading and trailing whitespace from each element
+    jokesArray = jokesArray.map((joke) => joke.trim());
+
+    // console.log(jokesArray);
+    res.render('index.ejs', { jokesArray: jokesArray });
   } catch (error) {
-    res.render('index.ejs', { joke: error.message });
+    res.render('index.ejs', { jokesArray: [error.message] });
   }
 });
 app.listen(PORT, () => {

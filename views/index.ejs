@@ -13,34 +13,83 @@
         <h1>JokeAPI</h1>
         <div class="joke-container">
             <form action="/getJoke" method="POST">
-                <div>
-                    <p>Category: </p>
-                    <input type="radio" onclick="toggleCat()" name="category" value="any" id="any">
-                    <label for="any">Any</label>
-                </div>
-                <div>
-                    <input type="radio" onclick="toggleCat()" name="category" value="misc" id="misc">
-                    <label for="misc">Miscellaneous</label>
-                    <div id="Misc-Opt" style="display:none;">
-                        <input type="checkbox" value="Programming" name="misc[]">
-                        <label for="Programming">Programming</label>
-                        <input type="checkbox" value="Dark" name="misc[]">
-                        <label for="Dark">Dark</label>
-                        <input type="checkbox" value="Pun" name="misc[]">
-                        <label for="Pun">Pun</label>
-                        <input type="checkbox" value="Spooky" name="misc[]">
-                        <label for="Spooky">Spooky</label>
-                        <input type="checkbox" value="Christmas" name="misc[]">
-                        <label for="Christmas">Christmas</label>
+                <!-- Category Selection -->
+                <fieldset>
+                    <legend>Category</legend>
+                    <div class="radio-group">
+                        <div>
+                            <input type="radio" onclick="toggleCat()" name="category" value="any" id="any">
+                            <label for="any">Any</label>
+                        </div>
+                        <div>
+                            <input type="radio" onclick="toggleCat()" name="category" value="misc" id="misc">
+                            <label for="misc">Miscellaneous</label>
+                            <div id="Misc-Opt" class="checkbox-group" style="display:none; margin-top:10px;">
+                                <div>
+                                    <input type="checkbox" value="Programming" name="misc[]">
+                                    <label for="Programming">Programming</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" value="Dark" name="misc[]">
+                                    <label for="Dark">Dark</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" value="Christmas" name="misc[]">
+                                    <label for="Christmas">Christmas</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" value="Pun" name="misc[]">
+                                    <label for="Pun">Pun</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" value="Spooky" name="misc[]">
+                                    <label for="Spooky">Spooky</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </fieldset>
+
+                <!-- Joke Type Selection -->
+                <fieldset>
+                    <legend>Joke Type</legend>
+                    <div class="radio-group" id="jokeType">
+                        <div>
+                            <input type="radio" name="jokeType" value="single" id="single">
+                            <label for="single">Single</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="jokeType" value="twopart" id="twopart">
+                            <label for="twopart">Two Part</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="jokeType" value="both" id="both">
+                            <label for="both">Both</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Number of Jokes -->
+                <div>
+                    <label for="jokeAmount">Joke Amount: </label>
+                    <input type="number" min="1" max="10" name="jokeAmount" id="jokeAmount">
                 </div>
+
+                <!-- Submit Button -->
                 <button id="get-joke" type="submit">Joke</button>
             </form>
 
-            <div class="joke">
-                <p id="joke-text">
-                    <%= joke %>
-                </p>
+            <div class="jokes">
+                <ul>
+                    <% jokesArray.forEach(function(joke) { %>
+                        <li>
+                            <pre><%= joke %></pre>
+                        </li>
+                        <div class="separator-line">
+                            <%= '-' .repeat(40) %>
+                        </div>
+                        <% }); %>
+                </ul>
             </div>
         </div>
     </div>
