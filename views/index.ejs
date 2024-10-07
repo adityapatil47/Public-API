@@ -5,20 +5,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JokeAPI</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 
 <body>
     <div class="container">
         <h1>JokeAPI</h1>
         <div class="joke-container">
-            <div class="joke">
-                <h2>Category: <span id="category"></span></h2>
-                <p id="joke"></p>
-            </div>
+            <form>
+                <div>
+                    <p>Category: </p>
+                    <input type="radio" onclick="toggleCat()" name="category" value="any" id="any">
+                    <label for="any">Any</label>
+                </div>
+                <div>
+                    <input type="radio" onclick="toggleCat()" name="category" value="miscellaneous" id="miscellaneous">
+                    <label for="miscellaneous">Miscellaneous</label>
+                    <div id="Miscellaneous" style="display:none;">
+                        <input type="checkbox" id="cat-cb1">
+                        <label for="cat-cb1">Programming</label>
+                        <input type="checkbox" id="cat-cb2">
+                        <label for="cat-cb2">Misc</label>
+                        <input type="checkbox" id="cat-cb3">
+                        <label for="cat-cb3">Dark</label>
+                        <input type="checkbox" id="cat-cb4">
+                        <label for="cat-cb4">Pun</label>
+                        <input type="checkbox" id="cat-cb5">
+                        <label for="cat-cb5">Spooky</label>
+                        <input type="checkbox" id="cat-cb6">
+                        <label for="cat-cb6">Christmas</label>
+                    </div>
+                </div>
+            </form>
             <button id="get-joke">Get Joke</button>
         </div>
     </div>
+    <script>
+        function toggleCat() {
+            const cat = document.querySelector('input[name="category"]:checked').value;
+            const misc = document.getElementById('Miscellaneous');
+
+            if (cat === 'any') {
+                misc.style.display = 'none';
+            } else if (cat === 'miscellaneous') {
+                misc.style.display = 'block';
+            }
+        }
+    </script>
 </body>
 
 </html>
