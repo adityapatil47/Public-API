@@ -5,53 +5,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JokeAPI</title>
-    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="/styles/styles.css">
 </head>
 
 <body>
     <div class="container">
         <h1>JokeAPI</h1>
         <div class="joke-container">
-            <form>
+            <form action="/getJoke" method="POST">
                 <div>
                     <p>Category: </p>
                     <input type="radio" onclick="toggleCat()" name="category" value="any" id="any">
                     <label for="any">Any</label>
                 </div>
                 <div>
-                    <input type="radio" onclick="toggleCat()" name="category" value="miscellaneous" id="miscellaneous">
-                    <label for="miscellaneous">Miscellaneous</label>
-                    <div id="Miscellaneous" style="display:none;">
-                        <input type="checkbox" id="cat-cb1">
-                        <label for="cat-cb1">Programming</label>
-                        <input type="checkbox" id="cat-cb2">
-                        <label for="cat-cb2">Misc</label>
-                        <input type="checkbox" id="cat-cb3">
-                        <label for="cat-cb3">Dark</label>
-                        <input type="checkbox" id="cat-cb4">
-                        <label for="cat-cb4">Pun</label>
-                        <input type="checkbox" id="cat-cb5">
-                        <label for="cat-cb5">Spooky</label>
-                        <input type="checkbox" id="cat-cb6">
-                        <label for="cat-cb6">Christmas</label>
+                    <input type="radio" onclick="toggleCat()" name="category" value="misc" id="misc">
+                    <label for="misc">Miscellaneous</label>
+                    <div id="Misc-Opt" style="display:none;">
+                        <input type="checkbox" value="Programming" name="misc[]">
+                        <label for="Programming">Programming</label>
+                        <input type="checkbox" value="Dark" name="misc[]">
+                        <label for="Dark">Dark</label>
+                        <input type="checkbox" value="Pun" name="misc[]">
+                        <label for="Pun">Pun</label>
+                        <input type="checkbox" value="Spooky" name="misc[]">
+                        <label for="Spooky">Spooky</label>
+                        <input type="checkbox" value="Christmas" name="misc[]">
+                        <label for="Christmas">Christmas</label>
                     </div>
                 </div>
+                <button id="get-joke" type="submit">Joke</button>
             </form>
-            <button id="get-joke">Get Joke</button>
+
+            <div class="joke">
+                <p id="joke-text">
+                    <%= joke %>
+                </p>
+            </div>
         </div>
     </div>
-    <script>
-        function toggleCat() {
-            const cat = document.querySelector('input[name="category"]:checked').value;
-            const misc = document.getElementById('Miscellaneous');
 
-            if (cat === 'any') {
-                misc.style.display = 'none';
-            } else if (cat === 'miscellaneous') {
-                misc.style.display = 'block';
-            }
-        }
-    </script>
+    <script src="/script.js"></script>
 </body>
 
 </html>
